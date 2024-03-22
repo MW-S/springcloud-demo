@@ -1,0 +1,12 @@
+server:
+  port: 8000
+#eureka
+eureka:
+  instance:
+    hostname: localhost
+    appname: 注册中心
+  client:
+    registerWithEureka: false # 单点的时候设置为 false 禁止注册自身
+    fetchRegistry: false
+    #serviceUrl: eureka.client.serviceUrl.defaultZone
+      #defaultZone: http://mwkd8001.com:8001/eureka/,http://mwkd8002.com:8002/eureka/

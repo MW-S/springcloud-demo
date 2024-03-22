@@ -1,0 +1,23 @@
+server:
+  port: 8005
+eureka:
+  instance:
+    prefer-ip-address: true
+    instance-id: config
+    #ip-address: 172.28.98.12
+  client:
+    registerWithEureka: true
+    fetchRegistry: true
+    serviceUrl:
+      defaultZone:  http://localhost:8000/eureka/
+      #defaultZone: http://mwkd8000.com:8000/eureka/,http://mwkd8001.com:8001/eureka/,http://mwkd8002.com:8002/eureka/
+spring:
+  application:
+    name: config  # 应用名称
+  cloud:
+    config:
+      server:
+        git:
+          uri: https://github.com/MW-S/springcloud-demo.git #配置文件所在仓库
+          default-label: master #配置文件分支
+          search-paths: config  #配置文件所在根目录

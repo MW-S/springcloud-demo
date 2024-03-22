@@ -1,0 +1,11 @@
+server:
+  port: 8082
+school: localhost
+management:
+  endpoint:
+    shutdown:
+      enabled: false
+  endpoints:
+    web:
+      exposure:
+        include: "*"

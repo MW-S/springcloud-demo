@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page</title>
+    <!-- 引入Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <!-- 引入自定义样式 -->
+    <style>
+        body {
+            background-image: url("/stars.jpg");
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            height: 100vh;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .login-container {
+            max-width: 400px;
+            background-color: rgba(255, 255, 255, 0.8);
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .login-container h2 {
+            text-align: center;
+            color: #333;
+        }
+        .github-link {
+            display: block;
+            text-align: center;
+            margin-top: 20px;
+        }
+        .github-link img {
+            width: 40px;
+            height: 40px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="login-container">
+        <h2>Login</h2>
+        <form id="MyForm">
+            <div class="form-group">
+                <label for="username">Username:</label>
+                <input type="text" class="form-control" id="username" placeholder="Enter username">
+            </div>
+            <div class="form-group">
+                <label for="password">Password:</label>
+                <input type="password" class="form-control" id="password" placeholder="Enter password">
+            </div>
+            <div class="radio">
+                <label>
+                    <input type="radio" name="loginMode" value="dataBase" checked>
+                    数据库模式
+                </label>
+            </div>
+            <div class="radio">
+                <label>
+                    <input type="radio" name="loginMode" value="ldap">
+                    LDAP模式
+                </label>
+            </div>
+            <button type="submit" class="btn btn-default">登录</button>
+        </form>
+        <div class="github-link">
+            <a id="githubLogin" href="#">
+                <svg height="32" aria-hidden="true" viewBox="0 0 16 16" version="1.1" width="32" data-view-component="true" class="octicon octicon-mark-github v-align-middle color-fg-default">
+                    <path d="M8 0c4.42 0 8 3.58 8 8a8.013 8.013 0 0 1-5.45 7.59c-.4.08-.55-.17-.55-.38 0-.27.01-1.13.01-2.2 0-.75-.25-1.23-.54-1.48 1.78-.2 3.65-.88 3.65-3.95 0-.88-.31-1.59-.82-2.15.08-.2.36-1.02-.08-2.12 0 0-.67-.22-2.2.82-.64-.18-1.32-.27-2-.27-.68 0-1.36.09-2 .27-1.53-1.03-2.2-.82-2.2-.82-.44 1.1-.16 1.92-.08 2.12-.51.56-.82 1.28-.82 2.15 0 3.06 1.86 3.75 3.64 3.95-.23.2-.44.55-.51 1.07-.46.21-1.61.55-2.33-.66-.15-.24-.6-.83-1.23-.82-.67.01-.27.38.01.53.34.19.73.9.82 1.13.16.45.68 1.31 2.69.94 0 .67.01 1.3.01 1.49 0 .21-.15.45-.55.38A7.995 7.995 0 0 1 0 8c0-4.42 3.58-8 8-8Z"></path>
+                </svg>
+            </a>
+        </div>
+    </div>
+</div>
+
+<!-- 引入Bootstrap JavaScript 和 jQuery -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script>
+    const client_id = 'ed2bc904d7284894630e';
+
+    const authorize_uri = 'https://github.com/login/oauth/authorize';
+    const redirect_uri = 'http://localhost:8003/oauth/redirect';
+
+    const link = document.getElementById('githubLogin');
+    link.href = `${authorize_uri}?client_id=${client_id}&redirect_uri=${redirect_uri}`;
+    function getSelectedRadioValue() {
+        // 获取所有name为gender的radio按钮
+        var radios = document.getElementsByName('loginMode');
+
+        // 遍历radio按钮
+        for (var i = 0; i < radios.length; i++) {
+            if (radios[i].checked) {
+                // 如果checked为true，则找到选中的radio按钮
+                console.log('Selected radio value is: ' + radios[i].value);
+                return  radios[i].value; // 结束函数
+            }
+        }
+
+        // 如果没有选中的radio按钮，则输出提示信息
+        console.log('No radio button is selected.');
+    }
+    // 获取表单元素
+    var form = document.getElementById('MyForm');
+    // 监听表单的submit事件
+    form.addEventListener('submit', function(event) {
+        // 阻止表单的默认提交行为
+        event.preventDefault();
+
+        // 获取表单数据
+        var username = document.getElementById('username').value;
+        var password = document.getElementById('password').value;
+        var loginType = getSelectedRadioValue()=="dataBase"?0:1;
+        var loginUrl = "";
+        console.log(loginType)
+        // 在这里，你可以对表单数据进行验证或者其他操作
+        // ...
+        if(loginType == 0){
+            loginUrl = "/jwt/login"
+        }else if(loginType == 1){
+            loginUrl = "/ldap/login"
+        }else {
+            return;
+        }
+        if(username.trim() === "" ){
+            alert("用户名不得为空！")
+            return;
+        }
+        if(password.trim() === ""){
+            alert("密码不得为空！")
+            return;
+        }
+        // 如果验证通过，可以使用以下方法提交表单
+        // 例如，使用AJAX提交数据
+        submitFormData(username, password, loginUrl);
+    });
+
+    // 提交表单数据的函数
+    function submitFormData(username, password, loginUrl) {
+        // 创建一个表单数据对象
+        var formData = {'username': username,'password': password};
+
+        // 创建一个XMLHttpRequest对象
+        var xhr = new XMLHttpRequest();
+
+        // 配置请求类型、URL以及异步处理
+        xhr.open('POST', loginUrl, true);
+
+        // 设置请求完成的处理函数
+        xhr.onload = function() {
+            if (xhr.status === 200) {
+                // 请求成功时执行的代码
+                console.log(xhr.responseText);
+                var r = JSON.parse(xhr.responseText)
+                alert(r.mess)
+            } else {
+                // 请求失败时执行的代码
+                console.error('An error occurred during form submission.');
+                alert("请求失败！")
+            }
+
+        };
+        // 设置请求头部，例如Content-Type
+        xhr.setRequestHeader('Content-Type', 'application/json');
+        xhr.send(JSON.stringify(formData));
+    }
+</script>
+</body>
+</html>

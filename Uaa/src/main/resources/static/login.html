@@ -5,11 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login Page</title>
     <!-- 引入Bootstrap CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="./css/bootstrap.min.css">
     <!-- 引入自定义样式 -->
     <style>
         body {
-            background-image: url("/stars.jpg");
+            background-image: url("./stars.jpg");
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
@@ -80,13 +80,13 @@
 </div>
 
 <!-- 引入Bootstrap JavaScript 和 jQuery -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="./js/jquery.min.js"></script>
+<script src="./js/bootstrap.min.js"></script>
 <script>
     const client_id = 'ed2bc904d7284894630e';
 
     const authorize_uri = 'https://github.com/login/oauth/authorize';
-    const redirect_uri = 'http://localhost:8003/oauth/redirect';
+    const redirect_uri = 'http://localhost:7573/oauth/redirect';
 
     const link = document.getElementById('githubLogin');
     link.href = `${authorize_uri}?client_id=${client_id}&redirect_uri=${redirect_uri}`;

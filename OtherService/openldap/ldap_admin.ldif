@@ -1,0 +1,82 @@
+dn: dc=test,dc=com
+o: test openldap
+dc: test
+objectClass: top
+objectClass: dcObject
+objectClass: organization
+objectClass: userSecurityInformation
+
+dn: ou=people,dc=test,dc=com
+objectClass: top
+objectClass: organizationalUnit
+ou: people
+userPassword:: e01ENX00UXJjT1VtNldhdStWdUJYOGcrSVBnPT0=
+
+dn: ou=ces,dc=test,dc=com
+objectClass: top
+objectClass: organizationalUnit
+ou: ces
+
+dn: cn=demo,dc=test,dc=com
+cn: demo
+gidNumber: 500
+objectClass: posixGroup
+objectClass: top
+
+dn: cn=ces2 ces2,ou=people,dc=test,dc=com
+givenName: ces2
+sn: ces2
+cn: ces2 ces2
+uidNumber: 1000
+gidNumber: 500
+homeDirectory: /home/users/cces2
+loginShell: /bin/bash
+objectClass: inetOrgPerson
+objectClass: posixAccount
+objectClass: top
+uid: ces2
+userPassword:: e01ENX1nbnpMRHVxS2NHeE1OS0Zva2ZoT2V3PT0=
+
+dn: cn=ldap_user_1,ou=people,dc=test,dc=com
+givenName: ldap
+sn: user_1
+userPassword:: e01ENX1jMmlmbDF2U21sSEdYK25rQ0tDS3lnPT0=
+uidNumber: 1001
+gidNumber: 500
+homeDirectory: /home/users/luser_1
+loginShell: /bin/bash
+objectClass: inetOrgPerson
+objectClass: posixAccount
+objectClass: top
+uid: ldap_user_1
+ou: USER
+cn: ldap_user_1
+
+dn: cn=ldap edit_1,ou=people,dc=test,dc=com
+givenName: ldap
+sn: edit_1
+cn: ldap edit_1
+uid: ldap_editor_1
+uidNumber: 1002
+gidNumber: 500
+homeDirectory: /home/users/ldap_editor_1
+objectClass: inetOrgPerson
+objectClass: posixAccount
+objectClass: top
+ou: EDITOR
+userPassword:: e01ENX0yTmpmZnpQZW10dW95eHpMSTM0Vmp3PT0=
+
+dn: cn=ldap adm_1,ou=people,dc=test,dc=com
+givenName: ldap
+sn: adm_1
+cn: ldap adm_1
+uid: ldap_adm_1
+uidNumber: 1003
+gidNumber: 500
+homeDirectory: /home/users/ldap_adm_1
+objectClass: inetOrgPerson
+objectClass: posixAccount
+objectClass: top
+ou: PRODUCT_ADMIN
+userPassword:: e01ENX1PeWJ6dk9IMVZjZ0ZEVjJzV1hlMk9RPT0=
+

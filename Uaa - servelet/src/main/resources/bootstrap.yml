@@ -20,7 +20,7 @@ spring:
     name: uaa
   cloud:
     config:
-      label: master
+      label: main
       profile: test
       discovery:
         enabled: true
@@ -36,7 +36,7 @@ spring:
     name: uaa
   cloud:
     config:
-      label: master  #指定仓库分支
+      label: main  #指定仓库分支
       profile: dev   #指定版本 本例中建立了dev 和 prod两个版本
       discovery:
         enabled: true  # 开启

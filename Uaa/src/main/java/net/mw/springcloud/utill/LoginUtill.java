@@ -52,7 +52,7 @@ public class LoginUtill {
             if(dao.insert(userPO) == 0){
                 isComplete =  false;
             }else{
-                isComplete = dao.bindRole( userPO.getId(), "EDITOR") > 0;
+                isComplete = dao.bindEditRole( userPO.getId()) > 0;
             }
         }
         if(isComplete)

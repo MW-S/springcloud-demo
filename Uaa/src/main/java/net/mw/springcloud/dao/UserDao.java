@@ -12,8 +12,8 @@ import java.util.List;
 @Mapper
 @Repository
 public interface UserDao extends BaseMapper<UserPO> {
-    @Insert("insert into user_role_index(user_id, role_id) values(#{userId}, (select id from role_index where name = #{roleName}));")
-    public Integer bindRole(Long userId, String roleName);
+    @Insert("insert into user_role_index(user_id, role_id) values(#{userId}, (select id from role_index where name = 'EDITOR'))")
+    public Integer bindEditRole(Long userId);
     @Select("select * from user_index ")
     public List<UserPO>  getList();
     @Select("select count(*) from user_index ")

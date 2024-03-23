@@ -1,0 +1,58 @@
+version: "3"
+services:
+  mysql: # 服务名称
+    image: mysql:latest # 或其它mysql版本
+    networks:
+      mynetwork:
+        ipv4_address: 172.16.238.14
+    environment:
+      - MYSQL_ROOT_PASSWORD=123456 # root用户密码
+    #      - TZ=Asia/Shanghai # 设置容器时区 我这里通过下面挂载方式同步的宿主机时区和时间了,这里忽略
+    volumes:
+      - ./mysql/log:/var/log/mysql # 映射日志目录，宿主机:容器
+      - ./mysql/data:/var/lib/mysql # 映射数据目录，宿主机:容器
+      - ./mysql/conf.d:/etc/mysql/conf.d # 映射配置目录，宿主机:容器
+      - ./mysql/demo.sql:/docker-entrypoint-initdb.d/init.sql
+    ports:
+      - 3306:3306 # 指定宿主机端口与容器端口映射关系，宿主机:容器
+    restart: always # 容器随docker启动自启
+  # 1.安装openldap
+      # 1.安装openldap
+  openldap:
+    image: osixia/openldap:latest
+    networks:
+      mynetwork:
+        ipv4_address: 172.16.238.15
+    restart: always
+    environment:
+      LDAP_ORGANISATION: "test openldap"
+      LDAP_DOMAIN: "test.com"
+      LDAP_ADMIN_PASSWORD: "123456"
+      LDAP_CONFIG_PASSWORD: "123456"
+    volumes:
+      - ./openldap/data:/var/lib/ldap
+      - ./openldap/config:/etc/ldap/slapd.d
+      - ./openldap/ldap_admin.ldif:/tmp/ldap_admin.ldif
+    ports:
+      - '389:389'
+  # 2.安装phpldapadmin
+  phpldapadmin:
+    image: osixia/phpldapadmin:latest
+    networks:
+      mynetwork:
+        ipv4_address: 172.16.238.16
+    restart: always
+    environment:
+      PHPLDAPADMIN_HTTPS: "false"
+      PHPLDAPADMIN_LDAP_HOSTS: 172.16.238.15
+    ports:
+      - '30004:80'
+    depends_on:
+      - openldap
+networks:
+  mynetwork:
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+        - subnet: 172.16.238.0/24

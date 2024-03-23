@@ -1,0 +1,1 @@
+ldap服务器启动后需要在php ldap admin中使用管理员登录，并手动将ldap_admin.ldif文件导入系统！

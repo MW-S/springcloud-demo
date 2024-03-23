@@ -48,7 +48,7 @@ mvn clean install
 
 ### 系统账号密码
 
-![image-20240324011915688](https://cdn.jsdelivr.net/gh/MW-S/MWCloudImg@main/img/20240324022622.png)
+![image-20240324011915688](.\mdPic\account.png)
 
 ### 项目启动
 
@@ -66,7 +66,7 @@ mvn clean package
 
 2. 打包完成后，需要到各个项目的根目录下面的target目录将jar包放置到all目录下，并分别重命名为Config.jar、Eureka.jar、Provider.jar、Uaa.jar
 
-   ![image-20240324004246011](https://cdn.jsdelivr.net/gh/MW-S/MWCloudImg@main/img/20240324022628.png)
+   ![image-20240324004246011](.\mdPic\projectStruct.png)
 
 3. 进入all目录，使用docker-compose一键运行容器（运行完成后，LDAP服务器的数据需要手动导入一下，文件目录在all/openldap/ldap_admin.ldif）
 
@@ -94,7 +94,7 @@ curl.exe -X POST  -H "Content-Type: application/json"    -d "{\"username\":\"edi
 
 ##### 效果图
 
-![image-20240323234312873](https://cdn.jsdelivr.net/gh/MW-S/MWCloudImg@main/img/20240324022632.png)
+![image-20240323234312873](.\mdPic\getToken1.png)
 
 #### 获取token(LDAP):
 
@@ -112,7 +112,7 @@ curl.exe -X POST  -H "Content-Type: application/json"    -d "{\"username\":\"lda
 
 ##### 效果图
 
-![image-20240324002307881](https://cdn.jsdelivr.net/gh/MW-S/MWCloudImg@main/img/20240324022633.png)
+![image-20240324002307881](.\mdPic\getToken2.png)
 
 #### 添加产品
 
@@ -128,7 +128,7 @@ curl.exe -X POST  -H "Content-Type: application/json" -H "token: eyJ0eXAiOiJKV1Q
 curl.exe -X POST  -H "Content-Type: application/json" -H "token: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE3MTEyMTExNzIsInN1YiI6ImVkaXRvcl8xIn0.S6qYlPI9Rhy9ZQIxfabSRD7hWlYJExF4SjrZcZtazWI"   -d "{\"name\":\"product1\"}"   "http://127.0.0.1:7573/product/save"
 ```
 
-##### ![image-20240324000936171](https://cdn.jsdelivr.net/gh/MW-S/MWCloudImg@main/img/20240324022635.png)
+##### ![image-20240324000936171](.\mdPic\add.png)
 
 查询产品列表
 
@@ -144,7 +144,7 @@ curl.exe -X GET   -H "token: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE3MT
 curl.exe -X GET   -H "token: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE3MTEyMTExNzIsInN1YiI6ImVkaXRvcl8xIn0.S6qYlPI9Rhy9ZQIxfabSRD7hWlYJExF4SjrZcZtazWI"    "http://127.0.0.1:7573/product/getList"
 ```
 
-##### ![image-20240324001701733](https://cdn.jsdelivr.net/gh/MW-S/MWCloudImg@main/img/20240324022637.png)
+##### ![image-20240324001701733](.\mdPic\read.png)
 
 #### 修改产品
 
@@ -160,7 +160,7 @@ curl.exe -X POST  -H "Content-Type: application/json" -H "token: eyJ0eXAiOiJKV1Q
 curl.exe -X POST  -H "Content-Type: application/json" -H "token: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE3MTEyMTExNzIsInN1YiI6ImVkaXRvcl8xIn0.S6qYlPI9Rhy9ZQIxfabSRD7hWlYJExF4SjrZcZtazWI"   -d "{\"id\":\"2\", \"name\":\"u_product1\"}"   "http://127.0.0.1:7573/product/update"
 ```
 
-##### ![image-20240324001924701](https://cdn.jsdelivr.net/gh/MW-S/MWCloudImg@main/img/20240324022639.png)
+##### ![image-20240324001924701](.\mdPic\update.png)
 
 #### 删除产品
 
@@ -176,4 +176,4 @@ curl.exe -X POST  -H "Content-Type: application/json" -H "token: eyJ0eXAiOiJKV1Q
 curl.exe -X POST  -H "Content-Type: application/json" -H "token: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE3MTEyMTExNzIsInN1YiI6ImVkaXRvcl8xIn0.S6qYlPI9Rhy9ZQIxfabSRD7hWlYJExF4SjrZcZtazWI"   -d "{\"id\":\"2\"}"   "http://127.0.0.1:7573/product/delById"
 ```
 
-##### ![image-20240324002042588](https://cdn.jsdelivr.net/gh/MW-S/MWCloudImg@main/img/20240324022641.png)
+##### ![image-20240324002042588](.\mdPic\del.png)
